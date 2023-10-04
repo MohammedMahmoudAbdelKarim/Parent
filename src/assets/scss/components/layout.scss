@@ -1,0 +1,22 @@
+nav {
+  ul {
+    li {
+      cursor: pointer;
+      a.nav-link {
+        transition: 0.5s all ease-in-out;
+        &:hover {
+          font-weight: 900;
+        }
+      }
+      &.active {
+        font-weight: 900;
+        a {
+          color: $primary;
+        }
+      }
+    }
+  }
+}
+.toast-container {
+  position: fixed;
+}

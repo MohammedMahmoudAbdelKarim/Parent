@@ -1,0 +1,104 @@
+<mat-drawer-container class="example-container" autosize>
+  <section id="dashboard">
+    <div class="container">
+      <div class="p-3">
+        <div class="breadcrumb text-primary">
+          <span class="me-2">Home</span> / <span class="ms-2">Dashboard</span>
+        </div>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="title">
+            <h2 class="pb-0">Users List</h2>
+          </div>
+          <button
+            (click)="openUserForm()"
+            class="btn btn-primary rounded-pill d-flex align-items-center"
+          >
+            <mat-icon class="mat-18">add</mat-icon>
+            <span>New User</span>
+          </button>
+        </div>
+        <ng-container *ngIf="usersList?.length">
+          <div
+            class="header p-3 px-5 d-flex align-items-center justify-content-between bg-white mt-3"
+          >
+            <span>User</span>
+            <span>Actions</span>
+          </div>
+          <div
+            infiniteScroll
+            [infiniteScrollDistance]="0"
+            [infiniteScrollThrottle]="200"
+            (scrolled)="onScroll()"
+          >
+            <mat-card
+              *ngFor="
+                let user of usersList;
+                let i = index;
+                trackBy: TrackedById
+              "
+            >
+              <mat-card-content>
+                <div
+                  class="d-flex align-items-center justify-content-between px-3"
+                >
+                  <div class="d-flex align-items-center">
+                    <img
+                      [src]="user.avatar"
+                      class="rounded-circle"
+                      [alt]="user.first_name"
+                      width="50%"
+                    />
+                    <span class="ms-3 text-dark">{{
+                      user.first_name + " " + user.last_name
+                    }}</span>
+                  </div>
+                  <div
+                    class="d-flex align-items-center actions justify-content-between flex-wrap"
+                  >
+                    <button
+                      (click)="openUserForm(user)"
+                      mat-mini-fab
+                      aria-label="Example icon button with a menu icon"
+                      class="mt-3 mt-lg-0"
+                    >
+                      <mat-icon color="primary">edit</mat-icon>
+                    </button>
+                    <button
+                      (click)="openDeletePopup(i, user)"
+                      mat-mini-fab
+                      aria-label="Example icon button with a menu icon"
+                      class="mx-0 mx-lg-3 mt-3 mt-lg-0"
+                    >
+                      <mat-icon color="primary">delete</mat-icon>
+                    </button>
+                    <button
+                      (click)="drawer.open(); singleUser = user"
+                      mat-mini-fab
+                      class="mt-3 mt-lg-0"
+                    >
+                      <mat-icon color="primary">keyboard_arrow_right</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="!usersList?.length">
+          <app-empty-state></app-empty-state>
+        </ng-container>
+      </div>
+    </div>
+  </section>
+  <mat-drawer #drawer class="example-sidenav" mode="side" position="end">
+    <app-offcanvas
+      (deleteUserEmitter)="onDeleteUserFromDrawer($event)"
+      (closeOffcanvasEmitter)="drawer.close()"
+      [user]="singleUser"
+    ></app-offcanvas>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <button type="button" mat-button>Toggle sidenav</button>
+  </div>
+</mat-drawer-container>

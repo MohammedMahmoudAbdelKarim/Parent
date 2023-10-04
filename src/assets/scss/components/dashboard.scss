@@ -1,0 +1,66 @@
+#dashboard {
+  background-color: #dedede;
+  .title {
+    h2 {
+      font-size: 30px;
+      color: #34495e;
+    }
+  }
+}
+
+.mat-mdc-card {
+  background-color: #fff !important;
+  &:hover {
+    span {
+      color: #fff !important;
+    }
+    background-color: $primary !important;
+  }
+}
+
+.actions {
+  .mat-mdc-fab.mat-accent,
+  .mat-mdc-mini-fab.mat-accent {
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid $primary;
+    &:last-of-type {
+      border: 0;
+      box-shadow: none !important;
+    }
+  }
+}
+
+.header {
+  span {
+    color: #7f8c8d;
+  }
+}
+.mat-drawer-inner-container {
+  background-color: #fff;
+  border: 0;
+  padding: 20px;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: #fff !important;
+}
+.mdc-text-field--no-label:not(.mdc-text-field--textarea)
+  .mat-mdc-form-field-input-control.mdc-text-field__input,
+.mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control::placeholder {
+  color: #34495e !important;
+}
+
+.popup {
+  position: absolute;
+  top: -54px;
+  right: 45%;
+}
+.user-container {
+  background-color: #7f8c8d;
+  width: 106px;
+  height: 106px;
+  border: 3px solid #fff;
+  position: fixed;
+  z-index: 99999;
+}
